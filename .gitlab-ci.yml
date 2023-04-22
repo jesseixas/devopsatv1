@@ -14,9 +14,6 @@ build:
   script:
    - apt-get update && apt-get install -y git npm
    - npm install
-  artifacts:
-    paths:
-      - devopsatv1/ 
 
 test:
   stage: test
