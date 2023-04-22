@@ -10,8 +10,12 @@ stages:
 
 build:
   stage: build
+  image: ubuntu:latest
   script:
-    - docker build -t jessica/repoatvdevops:latest -f Dockerfile .
+    - apt-get update && apt-get install -y git nodejs npm
+    - git clone git@gitlab.com:jesseixas/devopsatv1.git
+    - cd devopsatv1
+    - npm install
 
 test:
   stage: test
