@@ -11,21 +11,16 @@ stages:
 build:
   stage: build
   script:
-    - apt-get update -yq
-    - apt-get install -y npm
     - docker build -t jessica/repoatvdevops:latest .
-    - docker run --rm jessica/repoatvdevops:latest npm install
-    - docker run --rm jessica/repoatvdevops:latest npm test
-    
+
 test:
   stage: test
   script:
-    - docker pull jessica/repoatvdevops:latest
-    - docker run --rm jessica/repoatvdevops:latest npm test
-    
+    - docker run jessica/repoatvdevops:latest npm install
+    - docker run jessica/repoatvdevops:latest npm test
+
 deploy:
   stage: deploy
   script:
-    - docker pull jessica/repoatvdevops:latest
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - docker push jessica/repoatvdevops:latest
