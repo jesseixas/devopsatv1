@@ -11,7 +11,7 @@ stages:
 build:
   stage: build
   script:
-    - docker build -t jessica/repoatvdevops:latest -f Dockerfile.ubuntu .
+    - docker build -t jessica/repoatvdevops:latest -f Dockerfile .
 
 test:
   stage: test
