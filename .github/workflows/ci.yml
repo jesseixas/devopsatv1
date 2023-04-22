@@ -40,10 +40,10 @@ jobs:
         run: docker push jesseixas/repoatvdevops:latest
 
       - name: Send notification
-          if: github.event_name == 'pull_request' || github.event_name == 'push'
-          env:
-            DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          run: |
-            curl -X POST -H 'Content-type: application/json' \
-              --data '{"content": "Uma nova imagem Docker foi publicada!"}' \
-              $DISCORD_WEBHOOK
+        if: github.event_name == 'pull_request' || github.event_name == 'push'
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"content": "Uma nova imagem Docker foi publicada!"}' \
+            $DISCORD_WEBHOOK
