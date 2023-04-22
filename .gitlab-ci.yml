@@ -8,21 +8,26 @@ stages:
   - test
   - deploy
 
-build:
+build-job:
   stage: build
-  image: ubuntu:latest
+  image: node:14
   script:
-   - apt-get update && apt-get install -y git npm
-   - npm install
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build/
 
 test:
   stage: test
+  image: node:14
   script:
-    - docker run jessica/repoatvdevops:latest npm install
-    - docker run jessica/repoatvdevops:latest npm test
+    - npm install
+    - npm test
 
 deploy:
   stage: deploy
+  image: docker:latest
   script:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - docker push jessica/repoatvdevops:latest
