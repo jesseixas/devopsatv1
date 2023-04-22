@@ -32,5 +32,5 @@ deploy:
     - job: test
       artifacts: true
   script:
-    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - docker login -u $CI_REGISTRY_USER -p $DOCKER_PASSWORD
     - docker push jessica/repoatvdevops:latest
