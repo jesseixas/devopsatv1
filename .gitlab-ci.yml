@@ -11,8 +11,10 @@ stages:
 build:
   stage: build
   script:
-    - docker build -t jessica/repoatvdevops:latest .
-
+    - apt-get update && apt-get install -y git npm
+    - git clone https://gitlab.com/jesseixas/devopsatv1.git
+    - cd devopsatv1
+    
 test:
   stage: test
   script:
