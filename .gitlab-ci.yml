@@ -10,8 +10,13 @@ stages:
 
 build:
   stage: build
+  image: ubuntu:latest
   script:
-    - docker build -t jessica/repoatvdevops:latest .
+   - apt-get update && apt-get install -y git npm
+   - npm install
+  artifacts:
+    paths:
+      - devopsatv1/ 
 
 test:
   stage: test
