@@ -12,16 +12,18 @@ build:
   stage: build
   script:
     - docker build -t jessica/repoatvdevops:latest .
-    - docker run jessica/repoatvdevops:latest npm install
-    - docker run jessica/repoatvdevops:latest npm test
+    - docker run --rm jessica/repoatvdevops:latest npm install
+    - docker run --rm jessica/repoatvdevops:latest npm test
     
 test:
   stage: test
   script:
-    - echo "Testing application..."
+    - docker pull jessica/repoatvdevops:latest
+    - docker run --rm jessica/repoatvdevops:latest npm test
     
 deploy:
   stage: deploy
   script:
+    - docker pull jessica/repoatvdevops:latest
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - docker push jessica/repoatvdevops:latest
