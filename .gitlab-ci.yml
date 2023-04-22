@@ -12,7 +12,8 @@ build:
   stage: build
   image: ubuntu:latest
   script:
-    - apt-get update && apt-get install -y git nodejs npm
+    - apt-get update && apt-get install -y git npm
+    - git clone https://gitlab.com/jesseixas/devopsatv1.git
     - cd devopsatv1
     - npm install
 
