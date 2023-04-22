@@ -16,10 +16,6 @@ body {
     justify-content: center;
 }
 
-.header {
-    margin-bottom: 50px;
-}
-
 .container {
     width: 450px;
     background-color: aliceblue;
