@@ -1,26 +1,26 @@
-name: CI
+image: docker:latest
 
-on:
-  push:
-    branches:
-      - master
-  workflow_dispatch:
+services:
+  - docker:dind
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+stages:
+  - build
+  - test
+  - deploy
 
-  test:
-    image: ubuntu:latest
-    stage: test
-    script:
-      - echo "Teste bem sucedido"
+build:
+  stage: build
+  script:
+    - docker build -t jessica/repoatvdevops:latest .
 
-  deploy:
-    image: ubuntu:latest
-    stage: deploy
-    script:
-      - echo "Deploy bem sucedido"
+test:
+  stage: test
+  script:
+    - docker run jessica/repoatvdevops:latest npm install
+    - docker run jessica/repoatvdevops:latest npm test
+
+deploy:
+  stage: deploy
+  script:
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - docker push jessica/repoatvdevops:latest
