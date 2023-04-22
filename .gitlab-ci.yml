@@ -9,16 +9,17 @@ stages:
   - deploy
 
 build:
-     stage: build
-     script:
-        - docker build -t jessica/repoatvdevops:latest .
+  stage: build
+  script:
+    - docker build -t jessica/repoatvdevops:latest .
+    - docker run jessica/repoatvdevops:latest npm install
+    - docker run jessica/repoatvdevops:latest npm test
     
 test:
   stage: test
   script:
-    - docker run jessica/repoatvdevops:latest npm install
-    - docker run jessica/repoatvdevops:latest npm test
-
+    - echo "Testing application..."
+    
 deploy:
   stage: deploy
   script:
